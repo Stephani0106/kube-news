@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubenews_deployment
+spec: 
+  replicas: 5
+  selector:
+    matchLabels: 
+      app: kubenews
+  template:
+    metadata:
+      labels:
+        app: kubenews
+    spec: 
+      containers:
+      - name: kubenews
+        image: fabricioveronex/kubenews:v1
+        env:
+        - name: DB_DATABASE
+          value: "kubenews_database"
+        - name: DB_USERNAME
+          value: "psql"
+        - name: DB_PASSWORD
+          value: "KubeNews@123"
+        - name: DB_HOST
+          value: "postgres"
